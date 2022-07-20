@@ -11,6 +11,7 @@ import com.livelucky.lebenindeutschland.domain.model.util.QuestionWithOptins
 import com.livelucky.lebenindeutschland.domain.model.util.Quiz
 import com.livelucky.lebenindeutschland.domain.use.Provider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,12 +27,12 @@ class QuizViewModel @Inject constructor(
     val state = mutableStateOf(Quiz())
     fun initialize(categories: List<Category>, numberOfQuestions: Int) {
         if (!initialized) {
-            initialized = true
+
 
             this.numberOfQuestions = numberOfQuestions
             state.component1().categories = categories
 
-            viewModelScope.launch {
+            viewModelScope.launch(Dispatchers.IO) {
                 val xQuestionByCategorys =
                     provider.getXQuestionByCategorys(numberOfQuestions, categories)
                         .map { question ->
@@ -53,6 +54,7 @@ class QuizViewModel @Inject constructor(
 
 
                 state.component1().questions = xQuestionByCategorys
+                initialized = true
             }
 
         }

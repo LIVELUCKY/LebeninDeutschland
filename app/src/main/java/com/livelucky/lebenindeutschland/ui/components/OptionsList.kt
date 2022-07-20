@@ -6,6 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.livelucky.lebenindeutschland.data.views.QuizViewModel
 import com.livelucky.lebenindeutschland.domain.model.Attempt
 import com.livelucky.lebenindeutschland.domain.model.util.QuestionWithOptins
 import kotlinx.coroutines.launch

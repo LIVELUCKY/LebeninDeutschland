@@ -1,8 +1,10 @@
 package com.livelucky.lebenindeutschland.ui.components.screens
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
@@ -13,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.livelucky.lebenindeutschland.domain.model.Category
-import com.livelucky.lebenindeutschland.ui.components.QuestionsList
-import com.livelucky.lebenindeutschland.ui.components.QuizViewModel
+import com.livelucky.lebenindeutschland.ui.components.QuestionCard
+import com.livelucky.lebenindeutschland.data.views.QuizViewModel
 
 @Composable
 fun QuizScreen(
@@ -28,26 +30,30 @@ fun QuizScreen(
     var initialized by remember { mutableStateOf(false) }
     initialized = viewModel.initialized
     Scaffold {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-
-            if (initialized) {
 
 
-                QuestionsList(viewModel.state.component1())
-            } else {
-                Text(text = "loading")
-                CircularProgressIndicator()
+        if (initialized) {
+            Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                LazyColumn(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    items(viewModel.state.component1().questions) {
+
+                        QuestionCard(it)
+                    }
+
+                }
+                Button(onClick = { navController.navigate("quiz_config") },modifier = Modifier.fillMaxWidth()) {
+                    Text("Retry")
+                }
             }
 
-
-            Button(onClick = { navController.navigate("quiz_config") }) {
-                Text("Retry")
-            }
+        } else {
+            Text(text = "loading")
+            CircularProgressIndicator()
         }
+
+
     }
 }
 

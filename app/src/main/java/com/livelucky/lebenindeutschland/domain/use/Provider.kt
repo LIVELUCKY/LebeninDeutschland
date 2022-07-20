@@ -16,7 +16,9 @@ data class Provider(
     val getQuestionsOfStates: GetQuestionsOfStates,
     val getQuestionsOfNonStates: GetQuestionsOfNonStates,
     val getQuestionByCategorys: GetQuestionByCategorys,
-    val getXQuestionByCategorys: GetXQuestionByCategorys
+    val getXQuestionByCategorys: GetXQuestionByCategorys,
+    val getRightTimesByCategory:GetRightTimesByCategory,
+    val getAttemptsByCategory:GetAttemptsByCategory,
 
 
 )

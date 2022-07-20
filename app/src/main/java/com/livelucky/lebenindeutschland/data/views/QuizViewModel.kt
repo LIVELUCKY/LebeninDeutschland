@@ -1,11 +1,10 @@
-package com.livelucky.lebenindeutschland.ui.components
+package com.livelucky.lebenindeutschland.data.views
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.livelucky.lebenindeutschland.domain.model.Attempt
 import com.livelucky.lebenindeutschland.domain.model.Category
-import com.livelucky.lebenindeutschland.domain.model.Option
 import com.livelucky.lebenindeutschland.domain.model.Question
 import com.livelucky.lebenindeutschland.domain.model.util.QuestionWithOptins
 import com.livelucky.lebenindeutschland.domain.model.util.Quiz

@@ -76,5 +76,14 @@ class QuestionRepoImplementation(
 
     }
 
+    override suspend fun getRightTimesByCategory(category: Category): Int {
+        return qDao.getAttemptsByCategory(category).filter { it.answer }.size
+    }
+
+    override suspend fun getAttemptsByCategory(category: Category): Int {
+        return qDao.getAttemptsByCategory(category).size
+
+    }
+
 
 }

@@ -32,11 +32,13 @@ interface QDao {
     suspend fun getRandomXQuestions(x: Int):List<Question>
 
 
-    @Query("SELECT SUM(answer) From attempts WHERE q_id= :question_Id ")
+    @Query("SELECT SUM(CASE WHEN answer THEN 1 END) From attempts WHERE q_id= :question_Id ")
     suspend fun getRightTimes(question_Id: Long):Int
 
 
     @Query("SELECT * FROM questions WHERE category = :category")
     suspend fun getQuestionByCategory(category: Category):List<Question>
 
+    @Query("SELECT * From attempts INNER JOIN (Select * From questions where category=:category)  ON q_id=id")
+    suspend fun getAttemptsByCategory(category: Category):List<Attempt>
 }

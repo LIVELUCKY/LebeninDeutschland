@@ -33,4 +33,10 @@ interface QuestionRepo {
     suspend fun getQuestionByCategorys(categories: List<Category>):List<Question>
 
     suspend fun getXQuestionByCategorys(x:Int,categories: List<Category>):List<Question>
+
+    suspend fun getRightTimesByCategory(category: Category):Int
+
+    suspend fun getAttemptsByCategory(category: Category):Int
+
+
 }
